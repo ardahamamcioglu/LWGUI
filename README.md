@@ -1,4 +1,4 @@
-# LWGUI (Light Weight Shader GUI)
+﻿# LWGUI (Light Weight Shader GUI)
 
 [中文](https://github.com/JasonMa0012/LWGUI/blob/main/README_CN.md) | [English](https://github.com/JasonMa0012/LWGUI)
 
@@ -46,13 +46,12 @@ Use simple MaterialProperty Drawer syntax to achieve complex Shader GUI, save a 
 
 ## Installation
 
-1. Make sure your environment is compatible with LWGUI: **Unity 2019.2+**
-
-   **The Unity 2017-2018 version has stopped maintenance**, if necessary, please download **2017-2018 branch** to use.
+1. Make sure your environment is compatible with LWGUI: **Unity 2017.4+**
 2. Open your project
 3. `Window > Package Manager > Add > Add package from git URL` , enter: `https://github.com/JasonMa0012/LWGUI.git`
 
    - You can also choose to manually download the Zip from Github，then: `Package Manager > Add package from disk`
+   - For Unity 2017, please extract the Zip directly to the Assets directory
 
 ## Usage
 
@@ -171,7 +170,9 @@ KWEnumDrawer(string group, string n1, string k1, string n2, string k2, string n3
 #### SubEnum - SubKeywordEnum
 
 ```c#
-
+// enumName: like "UnityEngine.Rendering.BlendMode"
+SubEnumDrawer(string group, string enumName)
+    
 SubEnumDrawer(string group, string n1, float v1, string n2, float v2, string n3, float v3, string n4, float v4, string n5, float v5, string n6, float v6, string n7, float v7)
 
 SubKeywordEnumDrawer(string group, string kw1, string kw2, string kw3, string kw4, string kw5, string kw6, string kw7, string kw8, string kw9)
@@ -227,9 +228,16 @@ Result:
 #### Channel
 
 ```c#
-/// Draw a R/G/B/A drop menu
+/// Draw a R/G/B/A drop menu:
+/// 	R = (1, 0, 0, 0)
+/// 	G = (0, 1, 0, 0)
+/// 	B = (0, 0, 1, 0)
+/// 	A = (0, 0, 0, 1)
+/// 	RGB Average = (1f / 3f, 1f / 3f, 1f / 3f, 0)
+/// 	RGB Luminance = (0.2126f, 0.7152f, 0.0722f, 0)
+///		None = (0, 0, 0, 0)
 /// group：father group name, support suffix keyword for conditional display (Default: none)
-/// Target Property Type: Vector, used to dot() with Texture Sample Value
+/// Target Property Type: Vector, used to dot() with Texture Sample Value 
 ChannelDrawer(string group)
 ```
 Example:
@@ -483,8 +491,8 @@ MaterialToggleUIDrawer(string keyword)
 - [x] Support for search properties
 - [x] Support for Preset Manager
 - [x] Support for adaptive enumeration widths
-- [ ] Support for Unity 2017
-  - [ ] Reflection engine private function
+- [x] Support for Unity 2017
+  - [x] Reflection engine private function
   - [ ] Copy Properties Menu
 
 

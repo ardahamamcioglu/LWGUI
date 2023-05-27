@@ -49,7 +49,7 @@ namespace LWGUI
 							material.renderQueue = (int)floatValue;
 							return;
 						default:
-							Debug.LogWarning($"Unable to find Preset Property: {propertyName} in Material: {material}!");
+							Debug.LogWarning("Unable to find Preset Property: " + propertyName + " in Material: " + material + "!");
 							return;
 					}
 				}
@@ -157,13 +157,7 @@ namespace LWGUI
 		private void OnValidate()
 		{
 			// Debug.Log($"{this.name} OnValidate");
-			foreach (var preset in presets)
-			{
-				foreach (var propertyValue in preset.propertyValues)
-				{
-					propertyValue.OnValidate();
-				}
-			}
+			PresetHelper.ForceInit();
 			RevertableHelper.ForceInit();
 		}
 		
@@ -191,6 +185,22 @@ namespace LWGUI
 				{
 					propertyValue.Apply(material);
 				}
+			}
+		}
+
+		public Preset GetPreset(string presetName)
+		{
+			return presets.Find((inPreset => inPreset.presetName == presetName));
+		}
+
+		public Preset GetPreset(MaterialProperty property)
+		{
+			if (property.floatValue < presets.Count)
+				return presets[(int)property.floatValue];
+			else
+			{
+				Debug.LogError("Preset Property: " + property.name + " Index Out Of Range!");
+				return null;
 			}
 		}
 	}

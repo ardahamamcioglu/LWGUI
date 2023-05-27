@@ -1,4 +1,4 @@
-# LWGUI (Light Weight Shader GUI)
+﻿# LWGUI (Light Weight Shader GUI)
 
 [中文](https://github.com/JasonMa0012/LWGUI/blob/main/README_CN.md) | [English](https://github.com/JasonMa0012/LWGUI)
 
@@ -44,12 +44,12 @@
 
 ## Installation
 
-1. 确保你的环境兼容LWGUI: **Unity 2019.2+**
-
-   **Unity 2019以下版本已经停止维护**, 如有需要请自行下载**2017-2018分支**使用.
+1. 确保你的环境兼容LWGUI: **Unity 2017.4+**
 2. 打开已有工程
 3. （可能需要代理）`Window > Package Manager > Add > Add package from git URL` 输入`https://github.com/JasonMa0012/LWGUI.git`
+
    - 你也可以选择手动从Github下载Zip，然后从`Package Manager > Add package from disk`添加Local Package
+   - 对于Unity 2017, 请直接将Zip解压到Assets目录
 
 ## Usage
 
@@ -168,7 +168,9 @@ KWEnumDrawer(string group, string n1, string k1, string n2, string k2, string n3
 #### SubEnum - SubKeywordEnum
 
 ```c#
-
+// enumName: like "UnityEngine.Rendering.BlendMode"
+SubEnumDrawer(string group, string enumName)
+    
 SubEnumDrawer(string group, string n1, float v1, string n2, float v2, string n3, float v3, string n4, float v4, string n5, float v5, string n6, float v6, string n7, float v7)
 
 SubKeywordEnumDrawer(string group, string kw1, string kw2, string kw3, string kw4, string kw5, string kw6, string kw7, string kw8, string kw9)
@@ -224,9 +226,16 @@ Result:
 #### Channel
 
 ```c#
-/// Draw a R/G/B/A drop menu
+/// Draw a R/G/B/A drop menu:
+/// 	R = (1, 0, 0, 0)
+/// 	G = (0, 1, 0, 0)
+/// 	B = (0, 0, 1, 0)
+/// 	A = (0, 0, 0, 1)
+/// 	RGB Average = (1f / 3f, 1f / 3f, 1f / 3f, 0)
+/// 	RGB Luminance = (0.2126f, 0.7152f, 0.0722f, 0)
+///		None = (0, 0, 0, 0)
 /// group：father group name, support suffix keyword for conditional display (Default: none)
-/// Target Property Type: Vector, used to dot() with Texture Sample Value
+/// Target Property Type: Vector, used to dot() with Texture Sample Value 
 ChannelDrawer(string group)
 ```
 
@@ -478,8 +487,8 @@ MaterialToggleUIDrawer(string keyword)
 - [x] **支持仅显示已修改项**
 - [x] 支持预设管理器
 - [x] 支持自适应枚举宽度
-- [ ] 支持2017
-  - [ ] 反射引擎私有函数
+- [x] 支持2017
+  - [x] 反射引擎私有函数
   - [ ] 复制属性菜单
 
 
